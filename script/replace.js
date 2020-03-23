@@ -8,6 +8,9 @@ function fileReplace (filePath) {
             logger.debug(err);
         } else {
             files.forEach((filename) => {
+                if (['node_modules', '.git', '.idea'].includes(filename)) {
+                    return;
+                }
                 // 获取绝对路径
                 const filedir = path.join(filePath, filename);
                 const extname = path.extname(filename);

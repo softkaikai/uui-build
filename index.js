@@ -75,14 +75,20 @@ function copyProject() {
         log(chalk.green('开始拷贝node_modules...'));
         cp(path.join(pathSource, './node_modules'), path.join(pathTarget, './node_modules'));
         log(chalk.yellow('拷贝node_modules完成'));
+        exection('node');
+    } else {
+        log(chalk.green('开始替换文件...'));
+        // 防止fileReplace没有执行完
+        setTimeout(() => {
+            log(chalk.green('替换文件完成'));
+            exection('node');
+        }, 10000);
     }
-
-    exection('node');
 }
 
 function exection(cmd) {
     const projectName = program.project === 'platform' ? 'undunion-platform' : 'undunion-admin';
-    log(chalk.green('开始打包项目' + projectName));
+    log(chalk.green('开始打包项目' + projectName + '...'));
     const uui = spawn(cmd,
         ['--max-old-space-size=8192', getNodeModulePath(), 'b', projectName, '--prod'],
         {
@@ -104,8 +110,12 @@ function getNodeModulePath() {
     return path.resolve(pathTarget, './node_modules/@angular/cli/bin/ng')
 }
 function startCompress() {
+    const zipPath = path.join(pathDesktop, './dist.zip');
+    if (fse.pathExistsSync(zipPath)) {
+        fse.removeSync(zipPath);
+    }
     log(chalk.yellow('开始压缩...'));
-    compressing.zip.compressDir(path.join(pathTarget, './dist'), path.join(pathDesktop, './dist.zip'))
+    compressing.zip.compressDir(path.join(pathTarget, './dist'), zipPath)
         .then(() => {
             log(chalk.yellow('压缩成功，在桌面生成目标文件dist.zip'));
             log(chalk.yellow('最终代码目录地址： ' + pathTarget));
