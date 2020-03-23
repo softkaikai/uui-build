@@ -17,7 +17,8 @@ program.version(package.version);
 
 program
     .option('-p, --project [type]', 'project name to build: platform or admin', 'platform')
-    .option('--copy', 'force copy node_modules');
+    .option('--clear', 'clear target content')
+    .option('--copy', 'force re-copy node_modules');
 program.parse(process.argv);
 
 const log = console.log;
@@ -36,6 +37,10 @@ const filterFunc = (src, dest) => {
 const pathExistsSync = fse.pathExistsSync(pathTarget);
 let hasNodeModules = false;
 
+if (pathExistsSync && program.clear) {
+    clearContent(true);
+    return;
+}
 if (pathExistsSync) {
     clearContent(program.copy);
 }
