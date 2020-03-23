@@ -1,0 +1,36 @@
+{
+  "name": "uui-build",
+  "version": "1.0.0",
+  "description": "uui build",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/softkaikai/uui-build.git"
+  },
+  "bin": {
+    "uui-build": "./index.js"
+  },
+  "author": "softkaikai",
+  "license": "MIT",
+  "devDependencies": {
+    "fs-extra": "^8.1.0",
+    "log4js": "^6.1.2"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^5.0.0",
+    "compressing": "^1.5.0"
+  },
+  "bugs": {
+    "url": "https://github.com/softkaikai/uui-build/issues"
+  },
+  "homepage": "https://github.com/softkaikai/uui-build#readme",
+  "keywords": [
+    "uui",
+    "build",
+    "project"
+  ]
+}
