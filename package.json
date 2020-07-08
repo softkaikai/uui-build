@@ -1,6 +1,6 @@
 {
   "name": "uui-build",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "uui build",
   "main": "index.js",
   "scripts": {
