@@ -16,15 +16,17 @@ const program = new Command();
 program.version(package.version);
 
 program
-    .option('-p, --project [type]', 'project name to build: platform or admin', 'platform')
+    .option('-n, --name [type]', 'project name to build: platform or admin', 'platform')
+    .option('-p, --prefix [type]', 'project prefix', 'servever')
     .option('--clear', 'clear target content')
     .option('--copy', 'force re-copy node_modules');
 program.parse(process.argv);
 
+
 const log = console.log;
 const tmpDir = os.tmpdir();
 const cwd = process.cwd();
-const pathSource = path.join(cwd, '../undunion-platform-frontend');
+const pathSource = path.join(cwd, `../${program.prefix}-platform-frontend`);
 const pathTarget = path.join(tmpDir, './uui-build-temp-target');
 const pathCopy = path.join(__dirname, './cp');
 const pathDesktop = path.join(os.homedir(), './Desktop');
@@ -88,7 +90,7 @@ function copyProject() {
 }
 
 function exection(cmd) {
-    const projectName = program.project === 'platform' ? 'undunion-platform' : 'undunion-admin';
+    const projectName = program.name === 'platform' ? `${program.prefix}-platform` : `${program.prefix}-admin`;
     log(chalk.green('开始打包项目' + projectName + '...'));
     const uui = spawn(cmd,
         ['--max-old-space-size=8192', getNodeModulePath(), 'b', projectName, '--prod'],
