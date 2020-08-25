@@ -68,7 +68,8 @@ copyProject();
 function copyProject() {
     log(chalk.yellow('开始拷贝项目文件...'));
     cp(pathSource, pathTarget, filterFunc);
-    cp(pathCopy, pathTarget);
+    // 不用再拷贝资源文件，这些文件都已经替换了
+    // cp(pathCopy, pathTarget);
     log(chalk.blue('文件拷贝完成'));
     fileReplace(pathTarget);
     if (!hasNodeModules || program.copy) {
