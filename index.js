@@ -26,7 +26,7 @@ program.parse(process.argv);
 const log = console.log;
 const tmpDir = os.tmpdir();
 const cwd = process.cwd();
-const pathSource = path.join(cwd, `../${program.prefix}-platform-frontend`);
+const pathSource = path.join(cwd, `../servever-platform-frontend`);
 const pathTarget = path.join(tmpDir, './uui-build-temp-target');
 const pathCopy = path.join(__dirname, './cp');
 const pathDesktop = path.join(os.homedir(), './Desktop');
